@@ -1,75 +1,121 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
+import React, { useRef, useEffect } from 'react';
+import { Animated, StyleSheet, TouchableOpacity, Image, ImageBackground, View } from 'react-native';
+import { Link } from 'expo-router'; // Cambiamos useRouter por Link
+import GifAnimation from '../../components/GifAnimation';
 
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+const Index = () => {
+  const scaleValue = useRef(new Animated.Value(1)).current;
 
-export default function HomeScreen() {
+  // Configuración de la animación
+  useEffect(() => {
+    const animation = Animated.loop(
+      Animated.sequence([
+        Animated.timing(scaleValue, {
+          toValue: 1.2,
+          duration: 200,
+          useNativeDriver: true,
+        }),
+        Animated.timing(scaleValue, {
+          toValue: 1,
+          duration: 200,
+          useNativeDriver: true,
+        }),
+      ])
+    );
+
+    animation.start(); // Iniciar la animación
+
+    return () => animation.stop(); // Detener la animación al desmontar el componente
+  }, []);
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
+    <ImageBackground
+      source={require('../../assets/images/otras/LP_backgound.png')}
+      style={styles.background}
+      resizeMode="cover"
+    >
+      <View style={styles.container}>
+        {/* Logo de Pixelito */}
         <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
+          source={require('../../assets/images/otras/pixelito_logo.png')}
+          style={styles.logo}
+          resizeMode="contain"
         />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+
+        {/* Botón para crear avatar */}
+        <Link href="/avatar" asChild>
+          <TouchableOpacity style={styles.buttonContainer}>
+            <Animated.View style={{ transform: [{ scale: scaleValue }] }}>
+              <Image
+                source={require('../../assets/images/otras/crear_avatar.png')}
+                style={styles.buttonImage}
+                resizeMode="contain"
+              />
+            </Animated.View>
+          </TouchableOpacity>
+        </Link>
+
+        {/* Botón de Apóyanos */}
+        <Link href="/apoyanos" asChild>
+          <TouchableOpacity style={styles.supportButton}>
+            <Image
+              source={require('../../assets/images/otras/apoyanos.png')}
+              style={styles.supportButtonImage}
+              resizeMode="contain"
+            />
+          </TouchableOpacity>
+        </Link>
+
+        {/* Animación del GIF */}
+        <GifAnimation loop={true} style={styles.gifsize} />
+      </View>
+    </ImageBackground>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
+  background: {
+    flex: 1,
+    justifyContent: 'center',
     alignItems: 'center',
-    gap: 8,
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  container: {
+    flex: 1,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: 'transparent',
+    paddingVertical: 15,
+    paddingHorizontal: 0,
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  logo: {
+    width: 250,
+    height: 250,
+    marginTop: 20,
+  },
+  buttonContainer: {
+    marginTop: 20,
+    alignItems: 'center',
+    width: '100%',
+  },
+  buttonImage: {
+    width: 400,
+    height: 130,
+  },
+  supportButton: {
+    marginTop: 35,
+    alignItems: 'center',
+    width: '100%',
+  },
+  supportButtonImage: {
+    width: 300,
+    height: 70,
+  },
+  gifsize: {
+    marginTop: -30, // Ajusta el margen superior si es necesario
+    width: 20, // Ancho deseado del GIF
+    height: 20, // Alto deseado del GIF
+    resizeMode: 'contain', // Asegura que el GIF se ajuste al tamaño sin distorsión
   },
 });
+
+export default Index;

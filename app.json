@@ -1,42 +1,54 @@
 {
   "expo": {
-    "name": "pixelito-new",
-    "slug": "pixelito-new",
+    "name": "Pixelito",
+    "slug": "pixelito",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
-    "scheme": "pixelitonew",
-    "userInterfaceStyle": "automatic",
-    "newArchEnabled": true,
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",  // Corregido: añadido "splash" al nombre del archivo
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.jardino.pixelito"
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "package": "com.jardino.pixelito",
+      "permissions": [
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.ACCESS_MEDIA_LOCATION"
+      ]
     },
     "web": {
-      "bundler": "metro",
-      "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "c32ce86a-95dc-419e-9ca9-d84005fa7424"
+      }
     },
     "plugins": [
       "expo-router",
       [
-        "expo-splash-screen",
+        "expo-media-library",
         {
-          "image": "./assets/images/splash-icon.png",
-          "imageWidth": 200,
-          "resizeMode": "contain",
-          "backgroundColor": "#ffffff"
+          "photosPermission": "Permitir a Pixelito acceder a tus fotos.",
+          "savePhotosPermission": "Permitir a Pixelito guardar fotos.",
+          "isAccessMediaLocationEnabled": true
         }
       ]
     ],
-    "experiments": {
-      "typedRoutes": true
-    }
+    "owner": "jardino"
   }
 }

@@ -1,0 +1,191 @@
+import React from 'react';
+import ItemSelectorMultiple from './ItemSelectorMultiple';
+
+// Definición de colores personalizados para los bellos
+const COLORES_BELLOS = [
+  { id: 'negro', activeColor: '#3b3436', inactiveColor: '#191717' },
+  { id: 'rojo', activeColor: '#a92847', inactiveColor: '#950628' },
+  { id: 'cafe', activeColor: '#8e650e', inactiveColor: '#795200' },
+  { id: 'marron', activeColor: '#5b3c11', inactiveColor: '#281802' },
+  { id: 'naranja', activeColor: '#ffa500', inactiveColor: '#cc8400' },
+  { id: 'blanco', activeColor: '#e6e6e6', inactiveColor: '#bfbfbf' },
+  { id: 'weo', activeColor: '#e1ca8a', inactiveColor: '#c3a26a' },
+  { id: 'azul', activeColor: '#28b9d8', inactiveColor: '#056b88' },
+  { id: 'verde', activeColor: '#4b975a', inactiveColor: '#255e24' },
+  { id: 'rosa', activeColor: '#d665ac', inactiveColor: '#8c1658' },
+  { id: 'morrado', activeColor: '#7c41ae', inactiveColor: '#5e1a87' },
+];
+
+// Mapa de imágenes para los bellos
+const bellosImageMap = {
+  negro: [
+    require('../../assets/images/Bellos/Bellos_negro_01.png'),
+    require('../../assets/images/Bellos/Bellos_negro_02.png'),
+    require('../../assets/images/Bellos/Bellos_negro_03.png'),
+    require('../../assets/images/Bellos/Bellos_negro_04.png'),
+    require('../../assets/images/Bellos/Bellos_negro_05.png'),
+    require('../../assets/images/Bellos/Bellos_negro_06.png'),
+    require('../../assets/images/Bellos/Bellos_negro_07.png'),
+    require('../../assets/images/Bellos/Bellos_negro_08.png'),
+    require('../../assets/images/Bellos/Bellos_negro_09.png'),
+    require('../../assets/images/Bellos/Bellos_negro_10.png'),
+    require('../../assets/images/Bellos/Bellos_negro_11.png'),
+    require('../../assets/images/Bellos/Bellos_negro_12.png'),
+  ],
+  rojo: [
+    require('../../assets/images/Bellos/Bellos_rojo_01.png'),
+    require('../../assets/images/Bellos/Bellos_rojo_02.png'),
+    require('../../assets/images/Bellos/Bellos_rojo_03.png'),
+    require('../../assets/images/Bellos/Bellos_rojo_04.png'),
+    require('../../assets/images/Bellos/Bellos_rojo_05.png'),
+    require('../../assets/images/Bellos/Bellos_rojo_06.png'),
+    require('../../assets/images/Bellos/Bellos_rojo_07.png'),
+    require('../../assets/images/Bellos/Bellos_rojo_08.png'),
+    require('../../assets/images/Bellos/Bellos_rojo_09.png'),
+    require('../../assets/images/Bellos/Bellos_rojo_10.png'),
+    require('../../assets/images/Bellos/Bellos_rojo_11.png'),
+    require('../../assets/images/Bellos/Bellos_rojo_12.png'),
+  ],
+  cafe: [
+    require('../../assets/images/Bellos/Bellos_cafe_01.png'),
+    require('../../assets/images/Bellos/Bellos_cafe_02.png'),
+    require('../../assets/images/Bellos/Bellos_cafe_03.png'),
+    require('../../assets/images/Bellos/Bellos_cafe_04.png'),
+    require('../../assets/images/Bellos/Bellos_cafe_05.png'),
+    require('../../assets/images/Bellos/Bellos_cafe_06.png'),
+    require('../../assets/images/Bellos/Bellos_cafe_07.png'),
+    require('../../assets/images/Bellos/Bellos_cafe_08.png'),
+    require('../../assets/images/Bellos/Bellos_cafe_09.png'),
+    require('../../assets/images/Bellos/Bellos_cafe_10.png'),
+    require('../../assets/images/Bellos/Bellos_cafe_11.png'),
+    require('../../assets/images/Bellos/Bellos_cafe_12.png'),
+  ],
+  marron: [
+    require("../../assets/images/Bellos/Bellos_marron_01.png"),
+    require("../../assets/images/Bellos/Bellos_marron_02.png"),
+    require("../../assets/images/Bellos/Bellos_marron_03.png"),
+    require("../../assets/images/Bellos/Bellos_marron_04.png"),
+    require("../../assets/images/Bellos/Bellos_marron_05.png"),
+    require("../../assets/images/Bellos/Bellos_marron_06.png"),
+    require("../../assets/images/Bellos/Bellos_marron_07.png"),
+    require("../../assets/images/Bellos/Bellos_marron_08.png"),
+    require("../../assets/images/Bellos/Bellos_marron_09.png"),
+    require("../../assets/images/Bellos/Bellos_marron_10.png"),
+    require("../../assets/images/Bellos/Bellos_marron_11.png"),
+    require("../../assets/images/Bellos/Bellos_marron_12.png"),
+  ],
+  blanco: [
+    require('../../assets/images/Bellos/Bellos_blanco_01.png'),
+    require('../../assets/images/Bellos/Bellos_blanco_02.png'),
+    require('../../assets/images/Bellos/Bellos_blanco_03.png'),
+    require('../../assets/images/Bellos/Bellos_blanco_04.png'),
+    require('../../assets/images/Bellos/Bellos_blanco_05.png'),
+    require('../../assets/images/Bellos/Bellos_blanco_06.png'),
+    require('../../assets/images/Bellos/Bellos_blanco_07.png'),
+    require('../../assets/images/Bellos/Bellos_blanco_08.png'),
+    require('../../assets/images/Bellos/Bellos_blanco_09.png'),
+    require('../../assets/images/Bellos/Bellos_blanco_10.png'),
+    require('../../assets/images/Bellos/Bellos_blanco_11.png'),
+    require('../../assets/images/Bellos/Bellos_blanco_12.png'),
+  ],
+  naranja: [
+    require('../../assets/images/Bellos/Bellos_naranja_01.png'),
+    require('../../assets/images/Bellos/Bellos_naranja_02.png'),
+    require('../../assets/images/Bellos/Bellos_naranja_03.png'),
+    require('../../assets/images/Bellos/Bellos_naranja_04.png'),
+    require('../../assets/images/Bellos/Bellos_naranja_05.png'),
+    require('../../assets/images/Bellos/Bellos_naranja_06.png'),
+    require('../../assets/images/Bellos/Bellos_naranja_07.png'),
+    require('../../assets/images/Bellos/Bellos_naranja_08.png'),
+    require('../../assets/images/Bellos/Bellos_naranja_09.png'),
+    require('../../assets/images/Bellos/Bellos_naranja_10.png'),
+    require('../../assets/images/Bellos/Bellos_naranja_11.png'),
+    require('../../assets/images/Bellos/Bellos_naranja_12.png'),
+  ],
+  weo: [
+    require("../../assets/images/Bellos/Bellos_weo_01.png"),
+    require("../../assets/images/Bellos/Bellos_weo_02.png"),
+    require("../../assets/images/Bellos/Bellos_weo_03.png"),
+    require("../../assets/images/Bellos/Bellos_weo_04.png"),
+    require("../../assets/images/Bellos/Bellos_weo_05.png"),
+    require("../../assets/images/Bellos/Bellos_weo_06.png"),
+    require("../../assets/images/Bellos/Bellos_weo_07.png"),
+    require("../../assets/images/Bellos/Bellos_weo_08.png"),
+    require("../../assets/images/Bellos/Bellos_weo_09.png"),
+    require("../../assets/images/Bellos/Bellos_weo_10.png"),
+    require("../../assets/images/Bellos/Bellos_weo_11.png"),
+    require("../../assets/images/Bellos/Bellos_weo_12.png"),
+  ],
+  azul: [
+    require("../../assets/images/Bellos/Bellos_azul_01.png"),
+    require("../../assets/images/Bellos/Bellos_azul_02.png"),
+    require("../../assets/images/Bellos/Bellos_azul_03.png"),
+    require("../../assets/images/Bellos/Bellos_azul_04.png"),
+    require("../../assets/images/Bellos/Bellos_azul_05.png"),
+    require("../../assets/images/Bellos/Bellos_azul_06.png"),
+    require("../../assets/images/Bellos/Bellos_azul_07.png"),
+    require("../../assets/images/Bellos/Bellos_azul_08.png"),
+    require("../../assets/images/Bellos/Bellos_azul_09.png"),
+    require("../../assets/images/Bellos/Bellos_azul_10.png"),
+    require("../../assets/images/Bellos/Bellos_azul_11.png"),
+    require("../../assets/images/Bellos/Bellos_azul_12.png"),
+  ],
+  verde: [
+    require("../../assets/images/Bellos/Bellos_verde_01.png"),
+    require("../../assets/images/Bellos/Bellos_verde_02.png"),
+    require("../../assets/images/Bellos/Bellos_verde_03.png"),
+    require("../../assets/images/Bellos/Bellos_verde_04.png"),
+    require("../../assets/images/Bellos/Bellos_verde_05.png"),
+    require("../../assets/images/Bellos/Bellos_verde_06.png"),
+    require("../../assets/images/Bellos/Bellos_verde_07.png"),
+    require("../../assets/images/Bellos/Bellos_verde_08.png"),
+    require("../../assets/images/Bellos/Bellos_verde_09.png"),
+    require("../../assets/images/Bellos/Bellos_verde_10.png"),
+    require("../../assets/images/Bellos/Bellos_verde_11.png"),
+    require("../../assets/images/Bellos/Bellos_verde_12.png"),
+  ],
+  rosa: [
+    require("../../assets/images/Bellos/Bellos_rosa_01.png"),
+    require("../../assets/images/Bellos/Bellos_rosa_02.png"),
+    require("../../assets/images/Bellos/Bellos_rosa_03.png"),
+    require("../../assets/images/Bellos/Bellos_rosa_04.png"),
+    require("../../assets/images/Bellos/Bellos_rosa_05.png"),
+    require("../../assets/images/Bellos/Bellos_rosa_06.png"),
+    require("../../assets/images/Bellos/Bellos_rosa_07.png"),
+    require("../../assets/images/Bellos/Bellos_rosa_08.png"),
+    require("../../assets/images/Bellos/Bellos_rosa_09.png"),
+    require("../../assets/images/Bellos/Bellos_rosa_10.png"),
+    require("../../assets/images/Bellos/Bellos_rosa_11.png"),
+    require("../../assets/images/Bellos/Bellos_rosa_12.png"),
+  ],
+  morrado: [
+    require("../../assets/images/Bellos/Bellos_morrado_01.png"),
+    require("../../assets/images/Bellos/Bellos_morrado_02.png"),
+    require("../../assets/images/Bellos/Bellos_morrado_03.png"),
+    require("../../assets/images/Bellos/Bellos_morrado_04.png"),
+    require("../../assets/images/Bellos/Bellos_morrado_05.png"),
+    require("../../assets/images/Bellos/Bellos_morrado_06.png"),
+    require("../../assets/images/Bellos/Bellos_morrado_07.png"),
+    require("../../assets/images/Bellos/Bellos_morrado_08.png"),
+    require("../../assets/images/Bellos/Bellos_morrado_09.png"),
+    require("../../assets/images/Bellos/Bellos_morrado_10.png"),
+    require("../../assets/images/Bellos/Bellos_morrado_11.png"),
+    require("../../assets/images/Bellos/Bellos_morrado_12.png"),
+  ],
+};
+
+const Bellos = ({ onSelect }) => {
+  return (
+    <ItemSelectorMultiple
+      categoria="Bellos"
+      onSelect={onSelect}
+      imageMap={bellosImageMap}
+      colorInicial="negro"
+      escalaImagen={1} // Sin zoom adicional
+      maxSelecciones={2} // Permite seleccionar hasta 2 imágenes
+      coloresPersonalizados={COLORES_BELLOS} // Usa los colores personalizados
+    />
+  );
+};
+
+export default Bellos;
