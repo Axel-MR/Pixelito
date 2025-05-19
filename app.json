@@ -2,7 +2,7 @@
   "expo": {
     "name": "Pixelito",
     "slug": "pixelito",
-    "version": "1.0.8",
+    "version": "1.0.10",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -24,7 +24,7 @@
         "backgroundColor": "#9bccb2"
       },
       "package": "com.jardino.pixelito",
-      "versionCode": 48,
+      "versionCode": 50,
       "permissions": [
         "android.permission.READ_EXTERNAL_STORAGE",
         "android.permission.WRITE_EXTERNAL_STORAGE",
